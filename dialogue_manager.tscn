@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://rqvcajo1k3u7"]
+
+[ext_resource type="Script" uid="uid://drk4cf46lq5uj" path="res://dialouge_ui.gd" id="1_iove5"]
+[ext_resource type="FontFile" uid="uid://dtt2rp4pd6egv" path="res://assets/PixelOperator8.ttf" id="3_jslty"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6em4c"]
+bg_color = Color(0.039215688, 0.039215688, 0.078431375, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[node name="DialogueManager" type="CanvasLayer" unique_id=353297592]
+script = ExtResource("1_iove5")
+
+[node name="FadeOverlay" type="ColorRect" parent="." unique_id=1250358160]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="UIRoot" type="Control" parent="." unique_id=410401893]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DialogueBox" type="Control" parent="UIRoot" unique_id=496222100]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -212.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="UIRoot/DialogueBox" unique_id=1495691530]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6em4c")
+
+[node name="Margin" type="MarginContainer" parent="UIRoot/DialogueBox/Panel" unique_id=2087787331]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="UIRoot/DialogueBox/Panel/Margin" unique_id=823639305]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SpeakerName" type="Label" parent="UIRoot/DialogueBox/Panel/Margin/VBox" unique_id=1872647935]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+
+[node name="DialogueText" type="RichTextLabel" parent="UIRoot/DialogueBox/Panel/Margin/VBox" unique_id=1856363360]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_jslty")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+fit_content = true
+visible_characters_behavior = 1
+
+[node name="ContinueArrow" type="Label" parent="UIRoot/DialogueBox/Panel/Margin/VBox" unique_id=817324824]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "▼"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="OptionsContainer" type="VBoxContainer" parent="UIRoot/DialogueBox/Panel/Margin/VBox" unique_id=1652090799]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8

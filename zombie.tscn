@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://dqaq356vdix4y"]
+
+[ext_resource type="Script" uid="uid://dgfnocikojuug" path="res://zombie.gd" id="1_roy8y"]
+[ext_resource type="Texture2D" uid="uid://bpdx4kppb7vwi" path="res://assets/dec.png" id="2_roy8y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57kga"]
+size = Vector2(37, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_roy8y"]
+size = Vector2(38, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dysk7"]
+size = Vector2(433, 87)
+
+[node name="zombie" type="CharacterBody2D" unique_id=185622783 groups=["enemies"]]
+collision_layer = 4
+script = ExtResource("1_roy8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1212058696]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_57kga")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1768597062]
+scale = Vector2(0.57812494, 1.3874999)
+texture = ExtResource("2_roy8y")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1619051481]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=2083734124]
+shape = SubResource("RectangleShape2D_roy8y")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=1664164564]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DetectionArea" unique_id=1601019056]
+shape = SubResource("RectangleShape2D_dysk7")
+
+[node name="LedgeRay" type="RayCast2D" parent="." unique_id=1432391122]
+target_position = Vector2(45, 90)
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dq6nufn3wravy"]
+
+[ext_resource type="Texture2D" uid="uid://c2lxobug26d5y" path="res://assets/pipe.png" id="1_78010"]
+[ext_resource type="Script" uid="uid://db2kw0toof5ek" path="res://pipe.gd" id="1_arayy"]
+[ext_resource type="Texture2D" uid="uid://dsmj1ha0m85kg" path="res://assets/flash-sheet.png" id="2_arayy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1uqvy"]
+atlas = ExtResource("2_arayy")
+region = Rect2(0, 0, 16, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3wvs"]
+atlas = ExtResource("2_arayy")
+region = Rect2(16, 0, 16, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dcp6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1uqvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3wvs")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcp6d"]
+size = Vector2(215, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57kga"]
+size = Vector2(66, 20)
+
+[node name="pipe" type="Node2D" unique_id=798809000]
+script = ExtResource("1_arayy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1003514623]
+texture = ExtResource("1_78010")
+offset = Vector2(0, -5.5)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1981458007]
+position = Vector2(1, -41)
+sprite_frames = SubResource("SpriteFrames_dcp6d")
+autoplay = "default"
+frame_progress = 0.6668479
+
+[node name="Area2D" type="Area2D" parent="." unique_id=31795617]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=889667296]
+shape = SubResource("RectangleShape2D_dcp6d")
+
+[node name="pickuparea" type="Area2D" parent="." unique_id=1117476511]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickuparea" unique_id=583886966]
+shape = SubResource("RectangleShape2D_57kga")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="pickuparea" to="." method="_on_pickuparea_body_entered"]
+[connection signal="body_exited" from="pickuparea" to="." method="_on_pickuparea_body_exited"]
